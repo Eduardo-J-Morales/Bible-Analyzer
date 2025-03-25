@@ -59,11 +59,13 @@ export default function Index() {
           })
         })
 
-        console.log(response)
+        
         if  (!response.ok) throw new Error('Network response was not ok')
 
         const { answer } = await response.json()
 
+
+        console.log(answer)
         if (answer.status == 'error') {
           throw new Error(answer.message || 'Analysis failed')
         }
