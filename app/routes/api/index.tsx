@@ -36,7 +36,9 @@ export const action = async ({ request }: ActionFunctionArgs ) => {
     )
 
     } catch (error) {
-        return new Response(JSON.stringify({error: 'Error related to the API'})), {
+        return new Response(JSON.stringify({answer: {
+            error: 'Error related to the API'}
+        })), {
             status: 429,
             headers: { 'Content-Type': 'application/json'}
         }
