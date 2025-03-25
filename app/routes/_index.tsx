@@ -1,9 +1,18 @@
 import Webcam from 'react-webcam'
 import { useState } from 'react'
 
+export interface AIResponse {
+  status: 'success' | 'error';
+  data?: {
+    book: string;
+    chapter: string;
+  };
+  message?: string;
+}
+
 export default function Index() {
   const [error, setError] = useState<string | null>(null)
-  const [result, setResult] = useState<{chapter: string, book: string} | null>(null)
+  const [result, setResult] = useState<{ chapter: string, book: string } | null>(null)
   const [isLoading, setIsLoading] = useState<boolean | null>(false)
 
   const handleScreenshot = async (getScreenshot: () => string) => {
@@ -14,11 +23,11 @@ export default function Index() {
       const imageSrc = getScreenshot()
       if (!imageSrc) throw Error("Failed to captur image")
 
-        const response = await fetch('/api', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json'},
-          body: JSON.stringify({
-            message:  `
+      const response = await fetch('/api', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: `
             Analyze the provided image to identify which book and chapter of the Bible it is. Follow these rules:
             
             1. **Text Extraction:**
@@ -55,33 +64,31 @@ export default function Index() {
             - Prioritize the first detected book and chapter if there are multiple.
             - Use canonical names in Spanish (e.g., "1 Reyes," not "1 Rey").
             - The name of the chapter has to be in english.`,
-            image: imageSrc
-          })
+          image: imageSrc
         })
-
-        
-        if  (!response.ok) throw new Error('Network response was not ok')
-
-        const { answer } = await response.json()
+      })
 
 
-        console.log(answer)
-        if (answer.status == 'error') {
-          throw new Error(answer.message || 'Analysis failed')
-        }
+      if (!response.ok) throw new Error('Network response was not ok')
 
-        if (!answer.data?.book || !answer.data?.chapter) {
-          throw new Error('Invalid response structure')
-        }
+      const ai: { answer: AIResponse } = await response.json();
 
-        setResult(answer.data)
+      if (ai.answer.status === 'error') {
+        throw new Error(ai.answer.message || 'Analysis failed');
+      }
 
-    } catch(error) {
-      setError(error instanceof Error ? error.message : 'An unexpected error ocurred')
+      if (!ai.answer.data?.book || !ai.answer.data?.chapter) {
+        throw new Error('Invalid response structure');
+      }
+
+      setResult(ai.answer.data);
+    } catch (error) {
+      setError(error instanceof Error ? error.message : 'An unexpected error occurred');
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
+
 
   return (
     <div className='min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4'>

@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import type { ActionFunctionArgs} from '@remix-run/node'
-
-const storageData: any[] = []
+import type { AIResponse } from '../_index'
+const storageData: AIResponse[] = []
 
 export const action = async ({ request }: ActionFunctionArgs ) => {
     try {
