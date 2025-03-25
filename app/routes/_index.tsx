@@ -63,7 +63,7 @@ export default function Index() {
 
         const { answer } = await response.json()
 
-        if (answer.status === 'error') {
+        if (answer.status == 'error') {
           throw new Error(answer.message || 'Analysis failed')
         }
 
