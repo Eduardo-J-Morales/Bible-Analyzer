@@ -116,7 +116,7 @@ export default function Index() {
         audio={false}
         className='w-full h-full object-cover'
         screenshotFormat='image/jpeg'
-        videoConstraints={{ width: 1280, height: 720, facingMode: { exact: 'environment'} }}
+        videoConstraints={{ width: 1280, height: 720, facingMode: "environment"}}
       >
         {({ getScreenshot }) => (
           <button
