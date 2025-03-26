@@ -14,7 +14,8 @@ export default function Index() {
   const [error, setError] = useState<string | null>(null)
   const [result, setResult] = useState<{ chapter: string, book: string } | null>(null)
   const [isLoading, setIsLoading] = useState<boolean | null>(false)
-
+  
+  
   const handleScreenshot = async (getScreenshot: () => string) => {
     try {
       setIsLoading(true)
@@ -91,48 +92,73 @@ export default function Index() {
 
 
   return (
-    <div className='min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4'>
-      <div className='bg-white rounded-xl shadow-md p-6 w-full max-w-sm mx-auto'>
-        <h1 className='text-gray-800 text-2xl font-semibold text-center mb-4'>Bible Chapter Scanner</h1>
-        <div className='relative aspect-video bg-gray-200 rounded-lg overflow-hidden'>
-          <Webcam
-            audio={false}
-            className='w-full h-full object-cover'
-            screenshotFormat='image/jpeg'
-            videoConstraints={{ width: 1280, height: 720 }}
-          >
-            {({ getScreenshot }) => (
-              <button
-                disabled={isLoading}
-                onClick={() => handleScreenshot(getScreenshot)}
-                className={`absolute bottom-4 left-1/2 transform -translate-x-1/2 py-2 px-6 rounded-full text-white font-medium ${isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'} transition-colors`}
-              >{isLoading ? 'Processing...' : 'Take photo'}</button>
-            )}
-          </Webcam>
-        </div>
-        {isLoading && (
-
-          <div className='flex items-center justify-center p-4'>
-            <div className='w-8 h-8 border-4 border-gray-100 border-t-blue-600 rounded-full animate-spin'></div>
-          </div>
-        )}
-
-        {error && (
-          <div className='p-4 bg-red-50 border border-red-200 rounded-lg text-red-600 mt-4'>
-            <p className='font-medium mb-2'>Error:</p>
-            <p>{error}</p>
-          </div>
-        )}
-
-        {result && (
-          <div className='flex flex-col  items-center justify-center p-4 bg-green-50 border border-green-200 rounded-lg text-green-800 mt-4'>
-            <p className='font-medium mb-2'>Succssfully identified:</p>
-            <p className='mb-4'>Book of {result.book}, Chapter {result.chapter}</p>
-            <button className='py-2 px-4 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors' onClick={() => window.location.reload()}>Click here to view the whole chapter</button>
-          </div>
-        )}
-      </div>
+<div className='min-h-screen bg-gray/30 flex flex-col items-center ml-12 justify-center p-4'>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <div className='bg-white rounded-xl shadow-md p-6 w-[100%] mx-auto overflow-hidden'>
+  <div className='flex justify-between items-center'>
+      <button className="p-2 hover:bg-gray-100 rounded-full">
+        <span className="material-symbols-outlined text-3xl text-blue-600">
+          cameraswitch
+        </span>
+      </button>
+      <button >
+        <span className="material-symbols-outlined text-2xl text-red-600">
+          close
+        </span>
+      </button>
     </div>
+    <h1 className='text-3xl font-bold text-center text-gray-800 sm:text-2xl font-semibold text-center mb-4 break-words leading-tight'>
+      Bible Chapter Scanner
+    </h1>
+    
+    <div className='relative aspect-video bg-gray-200 rounded-lg overflow-hidden'>
+      <Webcam
+        audio={false}
+        className='w-full h-full object-cover'
+        screenshotFormat='image/jpeg'
+        videoConstraints={{ width: 1280, height: 720, facingMode: { exact: 'environment'} }}
+      >
+        {({ getScreenshot }) => (
+          <button
+            disabled={isLoading}
+            onClick={() => handleScreenshot(getScreenshot)}
+            className={`absolute bottom-4 left-1/2 transform -translate-x-1/2 py-2 px-4 sm:px-6 rounded-full text-sm sm:text-base text-white font-medium ${
+              isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
+            } transition-colors`}
+          >
+            {isLoading ? 'Processing...' : 'Take photo'}
+          </button>
+        )}
+      </Webcam>
+    </div>
+
+    {isLoading && (
+      <div className='flex items-center justify-center p-4'>
+        <div className='w-8 h-8 border-4 border-gray-100 border-t-blue-600 rounded-full animate-spin'/>
+      </div>
+    )}
+
+    {error && (
+      <div className='p-4 bg-red-50 border border-red-200 rounded-lg text-red-600 mt-4 text-sm'>
+        <p className='font-medium mb-2'>Error:</p>
+        <p>{error}</p>
+      </div>
+    )}
+
+    {result && (
+      <div className='flex flex-col items-center justify-center p-4 bg-green-50 border border-green-200 rounded-lg text-green-800 mt-4 text-center'>
+        <p className='font-medium mb-2 text-sm sm:text-base'>Successfully identified:</p>
+        <p className='mb-4 text-sm sm:text-base'>Book of {result.book}, Chapter {result.chapter}</p>
+        <button 
+          className='py-2 px-4 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm sm:text-base'
+          onClick={() => window.location.reload()}
+        >
+          Click here to view the whole chapter
+        </button>
+      </div>
+    )}
+  </div>
+</div>
   );
 }
 
