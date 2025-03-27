@@ -3,10 +3,7 @@ import type { ActionFunctionArgs, LoaderFunctionArgs} from '@remix-run/node'
 import { json } from "@remix-run/node";
 import type { AIResponse } from '../_index'
 
-
-
 const storagedData: (AIResponse | null)[] = []
-
 
 export async function action({ request }: ActionFunctionArgs) {
   
@@ -32,11 +29,8 @@ export async function action({ request }: ActionFunctionArgs) {
       ]).then(res => res.response.text())
       .then(res => res.replace(/```json\n|\n```/g, ''))
       .then(res => JSON.parse(res))
-      
-      storagedData.push(result);
 
-
-
+     storagedData.unshift(result)
       return json({ answer: result }, {headers: {'Access-Control-Allow-Origin': '*'}, status:200});
       
     } catch (error) {
@@ -46,11 +40,9 @@ export async function action({ request }: ActionFunctionArgs) {
   }
   
   export async function loader({ request }: LoaderFunctionArgs) {
-    setTimeout(async () => {
-      storagedData[0] = null
-    }, 15000)
-    
-    return json(storagedData[0], {
+      const lastData = storagedData.shift()
+  
+    return json(lastData, {
       headers: {
         'Access-Control-Allow-Origin': '*'
       }
