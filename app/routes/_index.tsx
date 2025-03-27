@@ -4,7 +4,7 @@ import { useState } from 'react'
 export interface AIResponse {
   status: 'success' | 'error';
   data?: {
-    book: string;
+    book: {name: string, shortName:  string}
     chapter: string;
   };
   message?: string;
@@ -12,7 +12,7 @@ export interface AIResponse {
 
 export default function Index() {
   const [error, setError] = useState<string | null>(null)
-  const [result, setResult] = useState<{ chapter: string, book: string } | null>(null)
+  const [result, setResult] = useState<{ chapter: string, book: {name: string, shortName: string} } | null>(null)
   const [isLoading, setIsLoading] = useState<boolean | null>(false)
   
   
@@ -33,7 +33,75 @@ export default function Index() {
             
             1. **Text Extraction:**
             - Read the visible text, focusing on biblical book names (e.g., "Genesis," "Psalms") and chapter numbers (e.g., "1," "3").
-            - Consider common abbreviations (e.g., "Jn" for John, "1 Cor" for 1 Corinthians).
+            - Once you identified the book name of the visible  text, please return not only the name of the book, instead return one of the following objects, of course the one that correponds to the book that is present on the visible text.
+            [
+  { "name": "Genesis", "shortName": "GEN" },
+  { "name": "Exodus", "shortName": "EXO" },
+  { "name": "Leviticus", "shortName": "LEV" },
+  { "name": "Numbers", "shortName": "NUM" },
+  { "name": "Deuteronomy", "shortName": "DEU" },
+  { "name": "Joshua", "shortName": "JOS" },
+  { "name": "Judges", "shortName": "JDG" },
+  { "name": "Ruth", "shortName": "RUT" },
+  { "name": "1 Samuel", "shortName": "1SA" },
+  { "name": "2 Samuel", "shortName": "2SA" },
+  { "name": "1 Kings", "shortName": "1KI" },
+  { "name": "2 Kings", "shortName": "2KI" },
+  { "name": "1 Chronicles", "shortName": "1CH" },
+  { "name": "2 Chronicles", "shortName": "2CH" },
+  { "name": "Ezra", "shortName": "EZR" },
+  { "name": "Nehemiah", "shortName": "NEH" },
+  { "name": "Esther", "shortName": "EST" },
+  { "name": "Job", "shortName": "JOB" },
+  { "name": "Psalms", "shortName": "PSA" },
+  { "name": "Proverbs", "shortName": "PRO" },
+  { "name": "Ecclesiastes", "shortName": "ECC" },
+  { "name": "Song", "shortName": "SNG" },
+  { "name": "Isaiah", "shortName": "ISA" },
+  { "name": "Jeremiah", "shortName": "JER" },
+  { "name": "Lamentations", "shortName": "LAM" },
+  { "name": "Ezekiel", "shortName": "EZK" },
+  { "name": "Daniel", "shortName": "DAN" },
+  { "name": "Hosea", "shortName": "HOS" },
+  { "name": "Joel", "shortName": "JOL" },
+  { "name": "Amos", "shortName": "AMO" },
+  { "name": "Obadiah", "shortName": "OBA" },
+  { "name": "Jonah", "shortName": "JON" },
+  { "name": "Micah", "shortName": "MIC" },
+  { "name": "Nahum", "shortName": "NAM" },
+  { "name": "Habakkuk", "shortName": "HAB" },
+  { "name": "Zephaniah", "shortName": "ZEP" },
+  { "name": "Haggai", "shortName": "HAG" },
+  { "name": "Zechariah", "shortName": "ZEC" },
+  { "name": "Malachi", "shortName": "MAL" },
+  { "name": "Matthew", "shortName": "MAT" },
+  { "name": "Mark", "shortName": "MRK" },
+  { "name": "Luke", "shortName": "LUK" },
+  { "name": "John", "shortName": "JHN" },
+  { "name": "Acts", "shortName": "ACT" },
+  { "name": "Romans", "shortName": "ROM" },
+  { "name": "1 Corinthians", "shortName": "1CO" },
+  { "name": "2 Corinthians", "shortName": "2CO" },
+  { "name": "Galatians", "shortName": "GAL" },
+  { "name": "Ephesians", "shortName": "EPH" },
+  { "name": "Philippians", "shortName": "PHP" },
+  { "name": "Colossians", "shortName": "COL" },
+  { "name": "1 Thessalonians", "shortName": "1TH" },
+  { "name": "2 Thessalonians", "shortName": "2TH" },
+  { "name": "1 Timothy", "shortName": "1TI" },
+  { "name": "2 Timothy", "shortName": "2TI" },
+  { "name": "Titus", "shortName": "TIT" },
+  { "name": "Philemon", "shortName": "PHM" },
+  { "name": "Hebrews", "shortName": "HEB" },
+  { "name": "James", "shortName": "JAS" },
+  { "name": "1 Peter", "shortName": "1PE" },
+  { "name": "2 Peter", "shortName": "2PE" },
+  { "name": "1 John", "shortName": "1JN" },
+  { "name": "2 John", "shortName": "2JN" },
+  { "name": "3 John", "shortName": "3JN" },
+  { "name": "Jude", "shortName": "JUD" },
+  { "name": "Revelation", "shortName": "REV" }
+]
             
             2. **Output Format:**
             - Return ONLY a valid JSON object, without markdown or additional text.
@@ -41,7 +109,7 @@ export default function Index() {
             {
             "status": "success" | "error",
             "data": {
-            "book": "BOOK_NAME_IN_ENGLISH",
+            "book": "BOOK_NAME_OBJECT",
             "chapter": "CHAPTER_NUMBER"
             },
             "message": "Descriptive message"
@@ -148,7 +216,7 @@ export default function Index() {
     {result && (
       <div className='flex flex-col items-center justify-center p-4 bg-green-50 border border-green-200 rounded-lg text-green-800 mt-4 text-center'>
         <p className='font-medium mb-2 text-sm sm:text-base'>Successfully identified:</p>
-        <p className='mb-4 text-sm sm:text-base'>Book of {result.book}, Chapter {result.chapter}</p>
+        <p className='mb-4 text-sm sm:text-base'>Book of {result.book.name}, Chapter {result.chapter}</p>
         <button 
           className='py-2 px-4 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm sm:text-base'
           onClick={() => window.location.reload()}
