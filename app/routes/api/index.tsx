@@ -33,7 +33,7 @@ export async function action({ request }: ActionFunctionArgs) {
       .then(res => res.replace(/```json\n|\n```/g, ''))
       .then(res => JSON.parse(res))
       
-      storagedData.unshift(result);
+      storagedData.push(result);
 
 
 
@@ -46,7 +46,10 @@ export async function action({ request }: ActionFunctionArgs) {
   }
   
   export async function loader({ request }: LoaderFunctionArgs) {
-
+    setTimeout(async () => {
+      storagedData[0] = null
+    }, 12000)
+    
     return json(storagedData[0], {
       headers: {
         'Access-Control-Allow-Origin': '*'
