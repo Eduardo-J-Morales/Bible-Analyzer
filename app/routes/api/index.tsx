@@ -48,7 +48,7 @@ export async function action({ request }: ActionFunctionArgs) {
   export async function loader({ request }: LoaderFunctionArgs) {
     setTimeout(async () => {
       storagedData[0] = null
-    }, 8000)
+    }, 10000)
     
     return json(storagedData[0], {
       headers: {
