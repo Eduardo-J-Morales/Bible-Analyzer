@@ -96,7 +96,7 @@ export default function Index() {
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <div className='bg-white rounded-xl shadow-md p-6 w-[100%] mx-auto overflow-hidden'>
   <div className='flex justify-between items-center'>
-      <button className="p-2 hover:bg-gray-100 rounded-full">
+      <button >
         <span className="material-symbols-outlined text-3xl text-blue-600">
           cameraswitch
         </span>
