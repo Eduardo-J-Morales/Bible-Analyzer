@@ -46,9 +46,10 @@ export async function action({ request }: ActionFunctionArgs) {
   }
   
   export async function loader({ request }: LoaderFunctionArgs) {
-    setTimeout(async() => {
+    setTimeout(async () => {
       storagedData[0] = null
-    }, 12000);
+    }, 12000)
+
     return json(storagedData[0], {
       headers: {
         'Access-Control-Allow-Origin': '*'
