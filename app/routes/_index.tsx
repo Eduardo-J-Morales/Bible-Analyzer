@@ -164,7 +164,7 @@ export default function Index() {
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <div className='bg-white rounded-xl  p-6 w-[100%] mx-auto overflow-hidden'>
       <button onClick={() => cameraType == "user" ? setCameraType('environment') : setCameraType("user")} >
-        <span className="material-symbols-outlined absolute scale-[2] top-[16%] left-1/2 text-3xl text-blue-600">
+        <span className="material-symbols-outlined absolute scale-[1.5] top-[16%] left-1/2 text-3xl text-blue-600">
           cameraswitch
         </span>
       </button>
