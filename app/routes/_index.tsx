@@ -193,7 +193,7 @@ export default function Index() {
       </Webcam>
     </div>
       <button >
-        <span className="material-symbols-outlined absolute scale-[2] bottom-10 left-1/2 text-3xl text-blue-600">
+        <span className="material-symbols-outlined absolute scale-[2] bottom-[16%] left-1/2 text-3xl text-blue-600">
           cameraswitch
         </span>
       </button>
