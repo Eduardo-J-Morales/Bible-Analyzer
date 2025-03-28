@@ -164,7 +164,7 @@ export default function Index() {
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <div className='bg-white rounded-xl  p-6 w-[100%] mx-auto overflow-hidden'>
       <button onClick={() => cameraType == "user" ? setCameraType('environment') : setCameraType("user")} >
-        <span className="material-symbols-outlined absolute scale-[1.5] top-[16%] left-1/2 text-3xl text-blue-600">
+        <span className="material-symbols-outlined absolute scale-[1.5] top-[22%] left-1/2 text-3xl text-blue-600">
           cameraswitch
         </span>
       </button>
@@ -173,9 +173,7 @@ export default function Index() {
           close
         </span>
       </button>
-    <h1 className='text-3xl font-bold text-center text-gray-800 sm:text-2xl font-semibold text-center mb-4 break-words leading-tight'>
-      Bible Chapter Scanner
-    </h1>
+
     
     <div className='relative aspect-video bg-gray-200 rounded-lg overflow-hidden'>
       <Webcam
