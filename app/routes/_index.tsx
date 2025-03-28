@@ -162,18 +162,21 @@ export default function Index() {
   return (
 <div className='min-h-screen bg-gray/30 flex flex-col items-center ml-12 justify-center p-4'>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-  <div className='bg-white rounded-xl  p-6 w-[100%] mx-auto overflow-hidden'>
-      <button onClick={() => cameraType == "user" ? setCameraType('environment') : setCameraType("user")} >
-        <span className="material-symbols-outlined absolute scale-[1.5] top-[22%] left-1/2 text-3xl text-blue-600">
-          cameraswitch
-        </span>
-      </button>
-      <button >
-        <span className="material-symbols-outlined  absolute top-10 right-10 text-2xl text-red-600">
-          close
-        </span>
-      </button>
-
+  <div className='bg-white rounded-xl p-6 w-[100%] mx-auto overflow-hidden'>
+  
+  <div className='flex justify-end items-center'>
+  <button className="md:hidden p-2 hover:bg-gray-100 scale-[1.5] absolute right-1/2 rounded-full">
+    <span className="material-symbols-outlined text-3xl text-blue-600">
+      cameraswitch
+    </span>
+  </button>
+  
+  <button className="p-2 hover:bg-red-50 rounded-full">
+    <span className="material-symbols-outlined text-2xl text-red-600">
+      close
+    </span>
+  </button>
+</div>
     
     <div className='relative aspect-video bg-gray-200 rounded-lg overflow-hidden'>
       <Webcam
