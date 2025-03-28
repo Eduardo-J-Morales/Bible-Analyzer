@@ -165,7 +165,7 @@ export default function Index() {
   <div className='bg-white rounded-xl p-6 w-[100%] mx-auto overflow-hidden'>
   
   <div className='flex justify-end items-center'>
-  <button className="p-2 hover:bg-gray-100 scale-[1.5] mx-auto rounded-full">
+  <button className="p-2 scale-[1.5] mx-auto rounded-full">
     <span onClick={() => cameraType == "user" ? setCameraType('environment') : setCameraType('user')}className="material-symbols-outlined  text-3xl text-blue-600">
       cameraswitch
     </span>
