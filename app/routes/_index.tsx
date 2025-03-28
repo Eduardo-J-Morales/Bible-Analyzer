@@ -14,7 +14,7 @@ export default function Index() {
   const [error, setError] = useState<string | null>(null)
   const [result, setResult] = useState<{ chapter: string, book: {name: string, shortName: string} } | null>(null)
   const [isLoading, setIsLoading] = useState<boolean | null>(false)
-  
+  const [cameraType, setCameraType] = useState<string | null>('environment')
   
   const handleScreenshot = async (getScreenshot: () => string) => {
     try {
@@ -177,7 +177,7 @@ export default function Index() {
         audio={false}
         className='w-full h-full object-cover'
         screenshotFormat='image/jpeg'
-        videoConstraints={{ width: 1280, height: 720, facingMode: "environment"}}
+        videoConstraints={{ width: 1280, height: 720, facingMode: `${cameraType}`}}
       >
         {({ getScreenshot }) => (
           <button
@@ -192,7 +192,7 @@ export default function Index() {
         )}
       </Webcam>
     </div>
-      <button >
+      <button onClick={() => cameraType == "user" ? setCameraType('environment') : setCameraType("user")} >
         <span className="material-symbols-outlined absolute scale-[2] bottom-[16%] left-1/2 text-3xl text-blue-600">
           cameraswitch
         </span>
