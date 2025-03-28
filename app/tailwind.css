@@ -4,7 +4,7 @@
 
 html,
 body {
-  @apply bg-white/10;
+  @apply bg-white;
 
   @media (prefers-color-scheme: dark) {
     color-scheme: light;

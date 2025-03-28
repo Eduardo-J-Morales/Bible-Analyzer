@@ -162,19 +162,12 @@ export default function Index() {
   return (
 <div className='min-h-screen bg-gray/30 flex flex-col items-center ml-12 justify-center p-4'>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-  <div className='bg-white rounded-xl shadow-md p-6 w-[100%] mx-auto overflow-hidden'>
-  <div className='flex justify-between items-center'>
+  <div className='bg-white rounded-xl  p-6 w-[100%] mx-auto overflow-hidden'>
       <button >
-        <span className="material-symbols-outlined text-3xl text-blue-600">
-          cameraswitch
-        </span>
-      </button>
-      <button >
-        <span className="material-symbols-outlined text-2xl text-red-600">
+        <span className="material-symbols-outlined  absolute top-10 right-10 text-2xl text-red-600">
           close
         </span>
       </button>
-    </div>
     <h1 className='text-3xl font-bold text-center text-gray-800 sm:text-2xl font-semibold text-center mb-4 break-words leading-tight'>
       Bible Chapter Scanner
     </h1>
@@ -199,6 +192,11 @@ export default function Index() {
         )}
       </Webcam>
     </div>
+      <button >
+        <span className="material-symbols-outlined absolute scale-[2] bottom-10 left-1/2 text-3xl text-blue-600">
+          cameraswitch
+        </span>
+      </button>
 
     {isLoading && (
       <div className='flex items-center justify-center p-4'>
