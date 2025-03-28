@@ -165,7 +165,7 @@ export default function Index() {
   <div className='bg-white rounded-xl p-6 w-[100%] mx-auto overflow-hidden'>
   
   <div className='flex justify-end items-center'>
-  <button className="md:hidden p-2 hover:bg-gray-100 scale-[1.5] absolute right-1/2 rounded-full">
+  <button className="md:hidden p-2 hover:bg-gray-100 scale-[1.5] absolute left-1/2 transform -translate-x-1/2 rounded-full">
     <span className="material-symbols-outlined text-3xl text-blue-600">
       cameraswitch
     </span>
