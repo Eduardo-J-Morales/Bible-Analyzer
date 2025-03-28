@@ -170,9 +170,11 @@ export default function Index() {
       cameraswitch
     </span>
   </button>
-  
-  <button className="p-2 hover:bg-red-50 rounded-full">
-    <span className="material-symbols-outlined text-2xl text-red-600">
+  <span className="material-symbols-outlined p-6 scale-[1.5] text-3xl text-blue-600">
+
+    </span>
+  <button className="p-2 absolute top-10 hover:bg-red-50 rounded-full">
+    <span className="material-symbols-outlined  text-2xl text-red-600">
       close
     </span>
   </button>
