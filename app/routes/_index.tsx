@@ -163,6 +163,11 @@ export default function Index() {
 <div className='min-h-screen bg-gray/30 flex flex-col items-center ml-12 justify-center p-4'>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <div className='bg-white rounded-xl  p-6 w-[100%] mx-auto overflow-hidden'>
+      <button onClick={() => cameraType == "user" ? setCameraType('environment') : setCameraType("user")} >
+        <span className="material-symbols-outlined absolute scale-[2] top-[16%] left-1/2 text-3xl text-blue-600">
+          cameraswitch
+        </span>
+      </button>
       <button >
         <span className="material-symbols-outlined  absolute top-10 right-10 text-2xl text-red-600">
           close
@@ -192,11 +197,6 @@ export default function Index() {
         )}
       </Webcam>
     </div>
-      <button onClick={() => cameraType == "user" ? setCameraType('environment') : setCameraType("user")} >
-        <span className="material-symbols-outlined absolute scale-[2] bottom-[16%] left-1/2 text-3xl text-blue-600">
-          cameraswitch
-        </span>
-      </button>
 
     {isLoading && (
       <div className='flex items-center justify-center p-4'>
